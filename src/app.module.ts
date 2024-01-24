@@ -1,32 +1,27 @@
 import { Module } from '@nestjs/common';
-import { OrderController } from './app.controller';
-import { AppService } from './app.service';
-import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { OrderController } from './orders/order.controller';
+import { OrderService } from './orders/order.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
-    RabbitMQModule.forRoot(RabbitMQModule, {
-      exchanges: [
-        {
-          name: 'EVENTS',
-          type: 'topic',
+    ClientsModule.register([
+      {
+        name: 'KAFKA',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'kafka_client_id',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'kafka_group_id',
+          },
         },
-        {
-          name: 'COMMANDS',
-          type: 'direct',
-        },
-        {
-          name: 'QUERIES',
-          type: 'direct',
-        },
-      ],
-      uri: 'amqp://rabbitmq:rabbitmq@localhost:5672',
-      connectionInitOptions: { wait: false },
-    }),  
-    // OrderModule,
+      },
+    ]),
   ],
   controllers: [OrderController],
-  providers: [AppService],
-  exports: [RabbitMQModule]
+  providers: [OrderService],
 })
 export class AppModule {}

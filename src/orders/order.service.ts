@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateOrderCommand } from './commands/impl';
+import { CreateOrderCommand, UpdateOrderCommand } from './commands/impl';
 import { GetOrders } from './queries/impl';
 
 @Injectable()
@@ -13,6 +13,10 @@ export class OrderService {
 
   async createOrder(data, headers) {
     return this.commandBus.execute(new CreateOrderCommand(data, headers));
+  }
+
+  async updateOrder(data, headers) {
+    return this.commandBus.execute(new UpdateOrderCommand(data, headers));
   }
 
   async getOrders() {

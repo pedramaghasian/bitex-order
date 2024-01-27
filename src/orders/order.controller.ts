@@ -20,6 +20,18 @@ export class OrderController {
     }
   }
 
+  @MessagePattern('commands.updateOrder')
+  async update(@Payload() message: any) {
+    try {
+      const { data, headers } = message
+      await this.orderSvc.updateOrder(data, headers);
+      return { msg: "Ok" }
+    } catch (error) {
+      console.log(error)
+      return { msg: "Failed", error }
+    }
+  }
+
   @MessagePattern('queryies.getOrders')
   async getOrders() {
     try {

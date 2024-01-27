@@ -3,7 +3,7 @@ import { Order } from './order.model';
 
 import { EventStoreService } from 'src/eventstore/eventstore.service';
 import { PrismaService } from 'nestjs-prisma';
-import {Prisma} from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class OrderRepository {
@@ -21,10 +21,24 @@ export class OrderRepository {
   }
 
 
-  async create(data:Prisma.OrderCreateInput): Promise<any> {
+  async create(data: Prisma.OrderCreateInput): Promise<any> {
     return this.prisma.order.create({
       data,
     });
+  }
+
+  async update(id: string, data: Prisma.OrderUpdateInput): Promise<any> {
+
+    const updatedOrder = await this.prisma.order.update({
+      where: {
+        id: id.toString(),
+      },
+      data: {
+        ...data,
+      },
+    });
+
+    return updatedOrder;
   }
 
   async findMany(): Promise<any> {

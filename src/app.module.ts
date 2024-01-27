@@ -7,7 +7,7 @@ import { OrderModule } from './orders/order.module';
 import { OrderCreatedEvent } from './orders/events/impl/order-created.event';
 import { EventStoreModule } from './eventstore/eventstore.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PrismaModule } from 'nestjs-prisma';
+import { OrderUpdatedEvent } from './orders/events/impl';
 
 @Module({
   imports: [
@@ -43,6 +43,8 @@ import { PrismaModule } from 'nestjs-prisma';
       transformers: {
         OrderCreatedEvent:
           (event: any) => new OrderCreatedEvent(event.data, event.meta),
+        OrderUpdatedEvent:
+          (event: any) => new OrderUpdatedEvent(event.data, event.meta),
       },
     }),
     OrderModule

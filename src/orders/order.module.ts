@@ -21,7 +21,7 @@ import { QueryHandlers } from './queries/handlers';
     OrderRepository, 
     ...CommandHandlers, 
     ...EventHandlers,
-    ...QueryHandlers
+    ...QueryHandlers,
   ],
 })
 export class OrderModule { }

@@ -1,8 +1,9 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CreateOrderDto } from './dtos';
+import { CreateOrderDto, UpdateOrderDto } from './dtos';
 import { OrderCreatedEvent } from './events/impl/order-created.event';
 import { IMetadata } from './interfaces';
 import { v4 as uuidv4 } from 'uuid';
+import { OrderUpdatedEvent } from './events/impl';
 
 export class Order extends AggregateRoot {
 
@@ -22,6 +23,16 @@ export class Order extends AggregateRoot {
         this.id = event.data.id;
         this.name = event.data.name;
     }
+
+    update(data: UpdateOrderDto, meta: IMetadata) {
+        this.apply(new OrderUpdatedEvent({ ...data }, { ...meta, eventId: uuidv4() }));
+    }
+
+    onOrderUpdatedEventt(event: OrderUpdatedEvent) {
+        this.id = event.data.id
+        this.name = event.data.name;
+    }
+
 
 }
 

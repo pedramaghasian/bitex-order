@@ -12,6 +12,7 @@ export class OrderController {
   killDragon(@Payload() message: any, @Ctx() context: KafkaContext): any {
     const originalMessage = context.getMessage();
     const { data, headers } = message
+    console.log(message)
     return this.orderSvc.createOrder(data, headers);
   }
 }

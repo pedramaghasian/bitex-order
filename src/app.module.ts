@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common';
 import { OrderController } from './orders/order.controller';
 import { OrderService } from './orders/order.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { CqrsModule } from '@nestjs/cqrs';
+import { OrderModule } from './orders/order.module';
 
 @Module({
   imports: [
+    CqrsModule,
     ClientsModule.register([
       {
         name: 'KAFKA',
@@ -20,6 +23,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       },
     ]),
+    OrderModule
   ],
   controllers: [OrderController],
   providers: [OrderService],

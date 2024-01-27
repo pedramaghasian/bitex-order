@@ -23,3 +23,13 @@ services:
       - "9000:9000"
     environment:
       ZK_HOSTS: "zookeeper:2181"
+      
+  postgres:
+    image: postgres:latest
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: test
+    ports:
+      - "5432:5432"

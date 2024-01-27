@@ -22,6 +22,7 @@
   "dependencies": {
     "@golevelup/nestjs-rabbitmq": "^4.1.0",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/cqrs": "^10.2.6",
     "@nestjs/microservices": "^10.3.1",
@@ -30,6 +31,8 @@
     "amqplib": "^0.10.3",
     "class-validator": "^0.14.1",
     "kafkajs": "^2.2.4",
+    "nestjs-prisma": "^0.22.0",
+    "node-eventstore-client": "^22.10.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
   },

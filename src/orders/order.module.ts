@@ -5,9 +5,15 @@ import { OrderService } from './order.service';
 import { CommandHandlers } from './commands/handlers';
 import { EventHandlers } from './events/handlers';
 import { OrderRepository } from './order.repository';
+import { PrismaModule } from 'nestjs-prisma';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [
+    CqrsModule , 
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule.forRoot()
+  ],
   controllers: [OrderController],
   providers: [OrderService, OrderRepository, ...CommandHandlers, ...EventHandlers],
 })

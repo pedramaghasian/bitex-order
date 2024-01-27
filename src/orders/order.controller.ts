@@ -9,10 +9,15 @@ export class OrderController {
 
 
   @MessagePattern('commands.createOrder')
-  killDragon(@Payload() message: any, @Ctx() context: KafkaContext): any {
-    const originalMessage = context.getMessage();
-    const { data, headers } = message
-    console.log(message)
-    return this.orderSvc.createOrder(data, headers);
+  async killDragon(@Payload() message: any, @Ctx() context: KafkaContext) {
+    try {
+      const originalMessage = context.getMessage();
+      const { data, headers } = message
+      await this.orderSvc.createOrder(data, headers);
+      return { msg: "Ok" }
+    } catch (error) {
+      console.log(error)
+      return { msg: "Failed", error }
+    }
   }
 }

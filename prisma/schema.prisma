@@ -11,6 +11,6 @@ datasource db {
 }
 
 model Order {
-  id        Int      @default(autoincrement()) @id
+  id       String      @default(uuid()) @id
   name     String
 }

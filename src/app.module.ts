@@ -4,6 +4,10 @@ import { OrderService } from './orders/order.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { CqrsModule } from '@nestjs/cqrs';
 import { OrderModule } from './orders/order.module';
+import { OrderCreatedEvent } from './orders/events/impl/order-created.event';
+import { EventStoreModule } from './eventstore/eventstore.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PrismaModule } from 'nestjs-prisma';
 
 @Module({
   imports: [
@@ -23,9 +27,27 @@ import { OrderModule } from './orders/order.module';
         },
       },
     ]),
+    // EventStore Module
+    EventStoreModule.registerAsync({
+      imports: [ConfigModule, CqrsModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        username: configService.get('EVENTSTORE_USERNAME', 'admin'),
+        password: configService.get('EVENTSTORE_PASSWORD', 'changeit'),
+        hostname: configService.get('EVENTSTORE_HOSTNAME', 'localhost'),
+        port: parseInt(configService.get('EVENTSTORE_PORT', '1113'), 10),
+      }),
+      subscriptions: {
+        orders: '$ce-orders',
+      },
+      transformers: {
+        OrderCreatedEvent:
+          (event: any) => new OrderCreatedEvent(event.data, event.meta),
+      },
+    }),
     OrderModule
   ],
   controllers: [OrderController],
   providers: [OrderService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,21 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { Order } from './order.model';
-import { CreateOrderDto } from './dtos';
+
+import { EventStoreService } from 'src/eventstore/eventstore.service';
+import { PrismaService } from 'nestjs-prisma';
+import {Prisma} from '@prisma/client'
 
 @Injectable()
 export class OrderRepository {
+  constructor(
+    private prisma: PrismaService,
+    private eventStore: EventStoreService,
+  ) { }
 
-    async create(data: CreateOrderDto): Promise<Order> {
-        const order = new Order('1')
-        return order;
+  async findOneById(id: string) {
+    const organization = new Order();
+    for await (const event of this.eventStore.readStreamFromStart(`orders-${id}`)) {
+      organization.apply(event, true);
     }
-
-    // async createOne(dto: CreateOrderDto) {
-    //     const doc = await this.model.create(dto);
-    //     const orderRoot = new OrderRoot(doc.id);
-    //     orderRoot.setData(doc);
-    //     return orderRoot;
-    // }
+    return organization;
+  }
 
 
+  async create(data:Prisma.OrderCreateInput): Promise<any> {
+    return this.prisma.order.create({
+      data,
+    });
+  }
 }

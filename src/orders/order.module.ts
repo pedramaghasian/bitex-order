@@ -7,6 +7,7 @@ import { EventHandlers } from './events/handlers';
 import { OrderRepository } from './order.repository';
 import { PrismaModule } from 'nestjs-prisma';
 import { ConfigModule } from '@nestjs/config';
+import { QueryHandlers } from './queries/handlers';
 
 @Module({
   imports: [
@@ -15,6 +16,12 @@ import { ConfigModule } from '@nestjs/config';
     PrismaModule.forRoot()
   ],
   controllers: [OrderController],
-  providers: [OrderService, OrderRepository, ...CommandHandlers, ...EventHandlers],
+  providers: [
+    OrderService, 
+    OrderRepository, 
+    ...CommandHandlers, 
+    ...EventHandlers,
+    ...QueryHandlers
+  ],
 })
 export class OrderModule { }

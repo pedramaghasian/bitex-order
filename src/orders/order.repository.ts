@@ -26,4 +26,9 @@ export class OrderRepository {
       data,
     });
   }
+
+  async findMany(): Promise<any> {
+    return this.prisma.order.findMany();
+  }
+
 }

@@ -15,7 +15,7 @@ export class Order extends AggregateRoot {
         if (this.id) {
             throw new Error(`Duplication Id: ${this.id}`);
         }
-        this.apply(new OrderCreatedEvent({ ...data, id: uuidv4() }, { ...meta, eventId: uuidv4().toString() }));
+        this.apply(new OrderCreatedEvent({ ...data, id: uuidv4() }, { ...meta, eventId: uuidv4() }));
     }
 
     onOrderCreatedEvent(event: OrderCreatedEvent) {

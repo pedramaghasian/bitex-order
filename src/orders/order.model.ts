@@ -29,7 +29,7 @@ export class Order extends  BaseAggregate {
         this.apply(new OrderUpdatedEvent({ ...data }, this.getVersionedMeta({ ...meta, eventId: uuidv4() })));
     }
 
-    onOrderUpdatedEventt(event: OrderUpdatedEvent) {
+    onOrderUpdatedEvent(event: OrderUpdatedEvent) {
         this.id = event.data.id
         this.name = event.data.name;
         this.versionHistory[event.meta.version] = event.meta;

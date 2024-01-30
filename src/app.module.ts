@@ -41,15 +41,15 @@ import { OrderUpdatedEvent } from './orders/events/impl';
         orders: '$ce-orders',
       },
       transformers: {
-        OrderCreatedEvent:
-          (event: any) => new OrderCreatedEvent(event.data, event.meta),
-        OrderUpdatedEvent:
-          (event: any) => new OrderUpdatedEvent(event.data, event.meta),
+        OrderCreatedEvent: (event: any) =>
+          new OrderCreatedEvent(event.data, event.meta),
+        OrderUpdatedEvent: (event: any) =>
+          new OrderUpdatedEvent(event.data, event.meta),
       },
     }),
-    OrderModule
+    OrderModule,
   ],
   controllers: [OrderController],
   providers: [OrderService],
 })
-export class AppModule { }
+export class AppModule {}

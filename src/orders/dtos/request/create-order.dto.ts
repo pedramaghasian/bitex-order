@@ -1,15 +1,3 @@
-import {
-    IsString, IsNotEmpty, IsUUID,
-} from 'class-validator';
+import { OrderDto } from '../common/order.dto';
 
-export class CreateOrderDto {
-
-    @IsString()
-    @IsNotEmpty()
-    @IsUUID()
-    id: string;
-
-    @IsString()
-    @IsNotEmpty()
-    name: string;
-}
+export class CreateOrderDto extends OrderDto {}

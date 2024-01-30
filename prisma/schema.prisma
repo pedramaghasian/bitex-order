@@ -11,6 +11,9 @@ datasource db {
 }
 
 model Order {
-  id       String      @default(uuid()) @id
-  name     String
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isPaid    Boolean  @default(false)
 }

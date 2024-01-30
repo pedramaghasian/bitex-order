@@ -11,17 +11,17 @@ import { QueryHandlers } from './queries/handlers';
 
 @Module({
   imports: [
-    CqrsModule , 
+    CqrsModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    PrismaModule.forRoot()
+    PrismaModule.forRoot(),
   ],
   controllers: [OrderController],
   providers: [
-    OrderService, 
-    OrderRepository, 
-    ...CommandHandlers, 
+    OrderService,
+    OrderRepository,
+    ...CommandHandlers,
     ...EventHandlers,
     ...QueryHandlers,
   ],
 })
-export class OrderModule { }
+export class OrderModule {}

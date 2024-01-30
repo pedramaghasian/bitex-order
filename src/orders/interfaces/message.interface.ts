@@ -1,8 +1,8 @@
 export interface IMessage {
-    level: string; // error, warning
-    service: string; // 
-    domain: string; //  
-    context: string; // addEmployeeByUsername  getEmployeeByUsername
-    exception: string; // DuplicateEmployeeCode
-    message: string;
-  }
+  level: string;
+  service: string;
+  domain: string;
+  context: string;
+  exception: string;
+  message: string;
+}

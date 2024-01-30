@@ -1,4 +1,4 @@
-import { CreateOrderHandler } from './create-order.handler'
-import { UpdateOrderHandler } from './update-order.handler'
+import { CreateOrderHandler } from './create-order.handler';
+import { UpdateOrderHandler } from './update-order.handler';
 
-export const CommandHandlers = [ UpdateOrderHandler,CreateOrderHandler]
+export const CommandHandlers = [UpdateOrderHandler, CreateOrderHandler];

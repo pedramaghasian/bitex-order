@@ -5,13 +5,14 @@ import { OrderRepository } from 'src/orders/order.repository';
 
 @EventsHandler(OrderCreatedEvent)
 export class OrderCreatedEventHandler
-  implements IEventHandler<OrderCreatedEvent> {
-  constructor(private readonly repository: OrderRepository) { }
+  implements IEventHandler<OrderCreatedEvent>
+{
+  constructor(private readonly repository: OrderRepository) {}
   async handle(event: OrderCreatedEvent) {
     try {
-      this.repository.create(event.data)
+      await this.repository.create(event.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 }

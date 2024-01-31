@@ -18,8 +18,6 @@ services:
       KAFKAJS_NO_PARTITIONER_WARNING: 1
       KAFKA_TIMEOUT: 6000
 
-
-
   kafdrop:
     image: obsidiandynamics/kafdrop:3.27.0
     environment:

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateOrderCommand, UpdateOrderCommand } from './commands/impl';
 import { GetOrders } from './queries/impl';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class OrderService {
@@ -12,7 +13,7 @@ export class OrderService {
   ) { }
 
   async createOrder(data, headers) {
-    return this.commandBus.execute(new CreateOrderCommand(data, headers));
+    return this.commandBus.execute(new CreateOrderCommand({ ...data, id: uuidv4() }, { ...headers, eventId: uuidv4() }));
   }
 
   async updateOrder(data, headers) {

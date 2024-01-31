@@ -31,7 +31,7 @@ export class OrderRepository {
   async update(id: string, data: Prisma.OrderUpdateInput): Promise<any> {
     const updatedOrder = await this.prisma.order.update({
       where: {
-        id: id.toString(),
+        id,
       },
       data: {
         ...data,

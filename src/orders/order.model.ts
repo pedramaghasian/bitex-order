@@ -16,8 +16,8 @@ export class Order extends BaseAggregate {
     }
     this.apply(
       new OrderCreatedEvent(
-        { ...data, id: uuidv4() },
-        this.getVersionedMeta({ ...meta, eventId: uuidv4() }),
+        data,
+        this.getVersionedMeta(meta),
       ),
     );
   }

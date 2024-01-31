@@ -23,6 +23,9 @@ import { OrderUpdatedEvent } from './orders/events/impl';
           },
           consumer: {
             groupId: 'kafka_group_id',
+            sessionTimeout: 20000, 
+            heartbeatInterval: 2000,
+            allowAutoTopicCreation: false, 
           },
         },
       },
@@ -52,4 +55,4 @@ import { OrderUpdatedEvent } from './orders/events/impl';
   controllers: [OrderController],
   providers: [OrderService],
 })
-export class AppModule {}
+export class AppModule { }

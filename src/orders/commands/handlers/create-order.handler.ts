@@ -2,7 +2,6 @@ import { CreateOrderCommand } from '../impl';
 import { OrderRepository } from '../../../orders/order.repository';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
-
 @CommandHandler(CreateOrderCommand)
 export class CreateOrderHandler
   implements ICommandHandler<CreateOrderCommand> {

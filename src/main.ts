@@ -9,7 +9,11 @@ async function bootstrap() {
       transport: Transport.KAFKA,
       options: {
         client: {
+          clientId: 'kafka_client_id',
           brokers: ['localhost:9092'],
+        },
+        consumer: {
+          groupId: 'kafka_group_id',
         },
       },
     },

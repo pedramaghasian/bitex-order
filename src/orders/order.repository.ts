@@ -29,7 +29,7 @@ export class OrderRepository {
   }
 
   async update(id: string, data: Prisma.OrderUpdateInput): Promise<any> {
-    const updatedOrder = await this.prisma.order.update({
+    return this.prisma.order.update({
       where: {
         id,
       },
@@ -44,8 +44,6 @@ export class OrderRepository {
         isPaid: true,
       },
     });
-
-    return updatedOrder;
   }
 
   async findMany(): Promise<any> {

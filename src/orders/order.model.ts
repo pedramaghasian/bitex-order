@@ -14,12 +14,7 @@ export class Order extends BaseAggregate {
     if (this.id) {
       throw new Error(`Duplication Id: ${this.id}`);
     }
-    this.apply(
-      new OrderCreatedEvent(
-        data,
-        this.getVersionedMeta(meta),
-      ),
-    );
+    this.apply(new OrderCreatedEvent(data, this.getVersionedMeta(meta)));
   }
 
   onOrderCreatedEvent(event: OrderCreatedEvent) {

@@ -1,3 +1,3 @@
-import { GetOrdersHandler } from './get-orders.handler'
+import { GetOrdersHandler } from './get-orders.handler';
 
-export const QueryHandlers = [GetOrdersHandler]
+export const QueryHandlers = [GetOrdersHandler];

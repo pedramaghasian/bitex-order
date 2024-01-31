@@ -1,5 +1,5 @@
 import { UpdateOrderCommand } from '../impl';
-import { OrderRepository } from '../../../orders/order.repository';
+import { OrderRepository } from '../../order.repository';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(UpdateOrderCommand)

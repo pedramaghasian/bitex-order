@@ -23,8 +23,8 @@ export class EventStoreService
   implements OnModuleInit, OnModuleDestroy, IEventPublisher
 {
   private client: EventStoreNodeConnection;
-  private options: ConnectionSettings;
-  private endpoint: TcpEndPoint;
+  private readonly options: ConnectionSettings;
+  private readonly endpoint: TcpEndPoint;
   private isConnected: boolean;
   private subject$: Subject<IEvent>;
 
